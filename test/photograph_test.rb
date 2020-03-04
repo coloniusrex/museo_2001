@@ -26,23 +26,3 @@ class PhotographTest < Minitest::Test
     assert_equal"1954", @photograph.year
   end
 end
-
-# pry(main)> photograph.id
-# #=> "1"
-#
-# pry(main)> photograph.name
-# #=> "Rue Mouffetard, Paris (Boy with Bottles)"
-#
-# pry(main)> photograph.artist_id
-# #=> "4"
-#
-# pry(main)> photograph.year
-# #=> "1954"
-#
-# pry(main)> attributes = {
-#   id: "2",
-#   name: "Ansel Adams",
-#   born: "1902",
-#   died: "1984",
-#   country: "United States"
-# }
