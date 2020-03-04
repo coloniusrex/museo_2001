@@ -1,9 +1,24 @@
+require 'csv'
+require 'mocha'
+
 class Curator
 
 attr_reader :photographs, :artists
   def initialize
     @photographs = []
     @artists = []
+  end
+
+  def load_artists(file_path)
+    CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
+      @artists << Artist.new(row)
+    end
+  end
+
+  def load_photographs(file_path)
+    CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
+      @photographs << Photograph.new(row)
+    end
   end
 
   def add_photograph(photograph)
@@ -36,5 +51,11 @@ attr_reader :photographs, :artists
     a = photographs_by_artist.select do |artist, photos|
       artist.country == country
     end.values.flatten
+  end
+
+  def photographs_taken_between(range)
+    @photographs.find_all do |photo|
+      range.first < photo.year.to_i && photo.year.to_i <= range.last
+    end
   end
 end
