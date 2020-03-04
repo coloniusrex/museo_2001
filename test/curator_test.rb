@@ -136,6 +136,13 @@ class CuratorTest < Minitest::Test
     expected = [@curator.photographs[0], @curator.photographs[3]]
     assert_equal expected, @curator.photographs_taken_between(1950..1965)
   end
+
+  def test_photos_by_age
+    @curator.load_artists('./data/artists.csv')
+    @curator.load_photographs('./data/photographs.csv')
+    @diane_arbus = @curator.find_artist_by_id("3")
+    assert_equal expected, @curator.artists_photographs_by_age(@diane_arbus)
+  end
 end
 
 # pry(main)> diane_arbus = curator.find_artist_by_id("3")
